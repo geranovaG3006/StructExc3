@@ -56,3 +56,62 @@ int main()
     system("pause");
     return 0;
 }
+
+// Същата задача решена чрез указатели към структури
+#include<iostream>
+#include<cstring>
+#include <iomanip>
+using namespace std;
+struct Automobile
+{
+    string brand;
+    string model;
+    string date;
+    double price;
+};
+int main()
+{
+    int n;
+    Automobile temp;
+    cout<<"Number of cars: ";
+    cin>>n;
+    Automobile automobile[n];
+    Automobile *q;
+    q=automobile;
+    for(int i=0;i<n;i++)
+    {
+            cout<<"Brand: ";
+            cin>>q->brand;
+            cout<<"Model: ";
+            cin>>q->model;
+            cout<<"Date: ";
+            cin>>q->date;
+            cout<<"Price: ";
+            cin>>q->price;
+            q++;
+    }
+    
+    for(int i=0;i<n-1;i++)
+    {
+        for(int j=i+1;j<n;j++)
+        {
+            if(automobile[i].price>automobile[j].price)
+            {
+                temp=automobile[i];
+                automobile[i]=automobile[j];
+                automobile[j]=temp;
+            }
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        cout<<"*****Automobile "<<i+1<<"*****"<<endl;
+        cout<<"Brand: "<<automobile[i].brand<<endl;
+        cout<<"Model: "<<automobile[i].model<<endl;
+        cout<<"Date : "<<automobile[i].date<<endl;
+        cout<<"Price: "<<automobile[i].price<<endl;
+    }
+    
+    system("pause");
+    return 0;
+}
