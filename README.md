@@ -72,44 +72,53 @@ struct Automobile
 int main()
 {
     int n;
-    Automobile temp;
     cout<<"Number of cars: ";
     cin>>n;
     Automobile automobile[n];
-    Automobile *q;
-    q=automobile;
+    Automobile *q_first;
+    Automobile *q_next;
+    q_first=automobile;
+    q_next=automobile;
     for(int i=0;i<n;i++)
     {
             cout<<"Brand: ";
-            cin>>q->brand;
+            cin>>q_first->brand;
             cout<<"Model: ";
-            cin>>q->model;
+            cin>>q_first->model;
             cout<<"Date: ";
-            cin>>q->date;
+            cin>>q_first->date;
             cout<<"Price: ";
-            cin>>q->price;
-            q++;
+            cin>>q_first->price;
+            q_first++;
     }
     
-    for(int i=0;i<n-1;i++)
-    {
-        for(int j=i+1;j<n;j++)
+    q_first=automobile;
+    q_next=automobile;
+    Automobile *temp;
+    q_next++;
+    
+    for(int i=0;i<n;i++)
         {
-            if(automobile[i].price>automobile[j].price)
+            if(q_first->price<q_next->price)
             {
-                temp=automobile[i];
-                automobile[i]=automobile[j];
-                automobile[j]=temp;
+                temp=q_first;
+                q_first=q_next;
+                q_next=temp;
             }
+            q_first++;
+            q_next++;
         }
-    }
+        
+    q_first=automobile;
+    q_next=automobile;
     for(int i=0;i<n;i++)
     {
         cout<<"*****Automobile "<<i+1<<"*****"<<endl;
-        cout<<"Brand: "<<automobile[i].brand<<endl;
-        cout<<"Model: "<<automobile[i].model<<endl;
-        cout<<"Date : "<<automobile[i].date<<endl;
-        cout<<"Price: "<<automobile[i].price<<endl;
+        cout<<"Brand: "<<q_first->brand<<endl;
+        cout<<"Model: "<<q_first->model<<endl;
+        cout<<"Date : "<<q_first->date<<endl;
+        cout<<"Price: "<<q_first->price<<endl;
+        q_first++;
     }
     
     system("pause");
